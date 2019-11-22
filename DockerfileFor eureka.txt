@@ -1,0 +1,21 @@
+FROM centos
+MAINTAINER fliay
+#把宿主机当前上下文的a.txt 拷贝到容器/usr/local/路径下
+COPY ConfigEureka7001-0.0.1-SNAPSHOT.jar /usr/local/eureka.jar
+COPY ConfigFromGit-0.0.1-SNAPSHOT.jar /usr/local/config.jar
+ADD jdk-8u231-linux-x64.tar.gz  /usr/local/
+#安装vim编辑器
+RUN yum -y install vim
+#设置工作访问时候的WORKDIR路径，登录的落脚点
+ENV MYPATH /usr/local
+WORKDIR $MYPATH
+#配置java与tomcat环境变量
+ENV JAVA_HOME /usr/local/jdk1.8.0_231
+ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+ENV PATH $PATH:$JAVA_HOME/bin
+ENTRYPOINT ["java","-server","-Xms64m","-Xmx128m","-jar","config.jar"]
+ENTRYPOINT ["java","-server","-Xms64m","-Xmx128m","-jar","eureka.jar"]
+
+
+docker run  -p 7001:7001 --name myeureka   --privileged=true myeureka
+
