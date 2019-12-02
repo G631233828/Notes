@@ -1,0 +1,68 @@
+varsion: '2'
+services:
+  #1.Redis
+   redis:
+      build: /home/filay/docker/Redis
+      mem_limit: 300M
+      posts:
+       - "6379:6379"
+   #3-1 Elasticsearch
+   elasticsearch:
+      build: /home/fliay/docker/Elasticsearch
+      mem_limit: 600M
+      posts:
+       - "9200:9200"
+       - "9300:9300"
+    #3-2 logstash
+    logstash:
+      build: /home/fliay/docker/Logstash
+      mem_limit: 1020M
+    #3-3 Kibana
+    kibana:
+      build: /home/filay/docker/kibana
+      mem_limit: 300M
+      posts:
+       - "5601:5601"
+    #4. Kaffa
+    kafka:
+      build: /home/filay/docker/Kafka
+      mem_limit: 300M
+      posts:
+       - "9092:9092"
+    #5.Nexus
+    nexus:
+      build: /home/filay/docker/nexus
+      mem_limit: 300M
+      posts:
+       - "8081:8081"
+    #6.mysql
+    mysql:
+      build: /home/filay/docker/MySql
+      mem_limit: 300M
+      posts: 
+       - "3306:3306"
+    #7.RabbitMQ
+    rabbitmq:
+      build: /home/filay/docker/RabbitMQ
+      mem_limit: 300M
+      posts:
+       - "15672:15672"
+       - "5672:5672"
+    #8.Mycat
+    mycat:
+      build: /home/filay/docker/Mycat
+      mem_limit: 300M
+      posts:
+       - "8066:8066"
+    #9.Jenkins
+    jenkins
+      build: /home/filay/docker/Jenkins
+      mem_limit: 300M
+      posts: 
+       - "8888:80"
+ networks:
+    default:
+      external:
+        name: envdm
+    
+       
